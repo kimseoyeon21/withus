@@ -1,27 +1,29 @@
 package com.example.WITHUS.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+
+@Entity
+@Table(name = "TB_FOLLOW")
 @Getter
 @Setter
-@Entity
-@Table(name = "TB_FOLLOW", schema = "campus_24K_LI2_p2_6")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Follow {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "FOLLOW_IDX", nullable = false)
-    private Integer id;
+    @Column(name = "FOLLOW_IDX")
+    private Long followIdx;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "FOLLOWER", nullable = false)
-    private Profile follower;
+    @Column(name = "FOLLOWER", nullable = false)
+    private String follower;
 
-    @Column(name = "FOLLOWEE", nullable = false, length = 50)
+    @Column(name = "FOLLOWEE", nullable = false)
     private String followee;
 
-    @Column(name = "FOLLOWED_AT", nullable = false, length = 50)
+    @Column(name = "FOLLOWED_AT")
     private String followedAt;
-
 }
