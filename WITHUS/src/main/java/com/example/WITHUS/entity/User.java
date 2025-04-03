@@ -11,7 +11,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "TB_USER")
+@Table(name="tb_user")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -41,9 +41,10 @@ public class User {
     @Column(name = "JOINED_AT")
     private Timestamp joinedAt;
 
-    @Column(name = "USER_PASSWORD", length = 100, nullable = false)
+    @Column(name = "TB_FOLLOWUSER_PASSWORD", length = 100, nullable = false)
     private String userPassword;
 }
+
 
 
 
