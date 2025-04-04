@@ -1,4 +1,4 @@
-package com.example.WITHUS.config;
+package com.example.WITHUS.Config;
 
 
 import org.springframework.context.annotation.Bean;
