@@ -23,11 +23,11 @@ public class User {
     @Column(name = "USER_ID", length = 50)
     private String userId;
 
+    @Column(name = "USER_PASSWORD", length = 100, nullable = false)
+    private String userPassword;
+
     @Column(name = "USER_NAME", length = 50, nullable = false)
     private String userName;
-
-    @Column(name = "USER_NICK", length = 50, nullable = false)
-    private String userNick;
 
     @Column(name = "USER_EMAIL", length = 50, nullable = false)
     private String userEmail;
@@ -41,8 +41,23 @@ public class User {
     @Column(name = "JOINED_AT")
     private Timestamp joinedAt;
 
-    @Column(name = "TB_FOLLOWUSER_PASSWORD", length = 100, nullable = false)
-    private String userPassword;
+    @Column(name = "USER_NICK", length = 50, nullable = false)
+    private String userNick;
+
+    @Column(name = "USER_SKILL", nullable = false, length = 500)
+    private String userSkill;
+
+    @Column(name = "USER_REGION", nullable = false, length = 100)
+    private String userRegion;
+
+    @Column(name = "USER_TARGET", nullable = false, length = 100)
+    private String userTarget;
+
+    @Column(name = "PROFILE_IMG", length = 1000)
+    private String profileImg;
+
+    @Column(name = "PROFILE_INFO", length = 1000)
+    private String profileInfo;
 }
 
 

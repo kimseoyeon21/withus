@@ -38,12 +38,13 @@ public class AuthController {
         // JWT 토큰 생성
         String token = jwtUtil.generateToken(user.getUserId());
 
-        // 토큰 응답
-        Map<String, String> response = new HashMap<>();
-        response.put("token", token);
 
-        return ResponseEntity.ok(token);
-        // JWT 또는 세션을 이 부분에서 발급
-        // return ResponseEntity.ok("로그인 성공!");
+        // 메시지 + 토큰 + userId 담은 응답 Map 생성
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "✅ 로그인 성공!");
+        response.put("token", token);
+        response.put("userId", user.getUserId());
+
+        return ResponseEntity.ok(response);
     }
 }
