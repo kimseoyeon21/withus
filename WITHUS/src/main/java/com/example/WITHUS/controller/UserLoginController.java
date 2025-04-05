@@ -14,7 +14,7 @@ import java.util.*;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class AuthController {
+public class UserLoginController {
 
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;

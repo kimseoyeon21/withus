@@ -10,7 +10,5 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, String> {
     Optional<User> findById(String userId); // 필드명과 정확히 일치
 
-
-        User findByUserId(String userId);
 }
 

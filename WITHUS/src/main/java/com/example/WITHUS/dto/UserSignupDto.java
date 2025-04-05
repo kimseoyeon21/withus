@@ -7,15 +7,20 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class Signup {
+public class UserSignupDto {
+    // 회원가입
     private String userId;
     private String userPassword;
     private String userPasswordCheck;
     private String userName;
-    private String userNick;
     private String userEmail;
     private LocalDate userBirthdate;
 
-
+    // 프로필 생성
+    private String userNick;
+    private String userSkill;
+    private String userRegion;
+    private String userTarget;
+    private String profileImg;
 
 }

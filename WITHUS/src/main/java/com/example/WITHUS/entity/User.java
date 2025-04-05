@@ -1,11 +1,13 @@
 package com.example.WITHUS.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
+import org.springframework.data.annotation.Transient;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -35,9 +37,6 @@ public class User {
     @Column(name = "USER_BIRTHDATE")
     private Date userBirthdate;
 
-    @Column(name = "USER_ROLE", length = 10)
-    private String userRole;
-
     @Column(name = "JOINED_AT")
     private Timestamp joinedAt;
 
@@ -53,11 +52,13 @@ public class User {
     @Column(name = "USER_TARGET", nullable = false, length = 100)
     private String userTarget;
 
-    @Column(name = "PROFILE_IMG", length = 1000)
+    @Column(name = "PROFILE_INFO", length = 1000, nullable = true)
+    private String profileInfo;
+
+    @Column(name = "PROFILE_IMG", length = 1000, nullable = true)
     private String profileImg;
 
-    @Column(name = "PROFILE_INFO", length = 1000)
-    private String profileInfo;
+
 }
 
 

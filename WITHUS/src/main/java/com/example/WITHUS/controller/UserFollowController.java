@@ -1,7 +1,7 @@
 package com.example.WITHUS.controller;
 
 import com.example.WITHUS.Repository.FollowRepository;
-import com.example.WITHUS.dto.FollowDto;
+import com.example.WITHUS.dto.UserFollowDto;
 import com.example.WITHUS.entity.Follow;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -11,13 +11,13 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class FollowController {
+public class UserFollowController {
 
     private final FollowRepository followRepository;
 
     // 1️⃣ 팔로우 추가
     @PostMapping
-    public ResponseEntity<String> follow(@RequestBody FollowDto dto) {
+    public ResponseEntity<String> follow(@RequestBody UserFollowDto dto) {
         if (!followRepository.existsByFollowerAndFollowee(dto.getFollower(), dto.getFollowee())) {
             Follow follow = Follow.builder()
                     .follower(dto.getFollower())
@@ -33,7 +33,7 @@ public class FollowController {
 
     // 2️⃣ 팔로우 취소
     @DeleteMapping
-    public ResponseEntity<String> unfollow(@RequestBody FollowDto dto) {
+    public ResponseEntity<String> unfollow(@RequestBody UserFollowDto dto) {
         if (followRepository.existsByFollowerAndFollowee(dto.getFollower(), dto.getFollowee())) {
             followRepository.deleteByFollowerAndFollowee(dto.getFollower(), dto.getFollowee());
             return ResponseEntity.ok("언팔로우 성공");

@@ -2,7 +2,7 @@ package com.example.WITHUS.controller;
 
 
 import com.example.WITHUS.Repository.UserRepository;
-import com.example.WITHUS.dto.ChangePasswordRequestDto;
+import com.example.WITHUS.dto.UserChangePasswordRequestDto;
 import com.example.WITHUS.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
-public class ChangePasswordController {
+public class UserChangePasswordController {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     @PostMapping("/change-password")
-    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequestDto dto) {
+    public ResponseEntity<?> changePassword(@RequestBody UserChangePasswordRequestDto dto) {
 
         // 👉 로그인된 유저 정보는 이미 확보된 상태라고 가정
         // 실제 구현 시 세션, 토큰, 필터 등에서 유저 ID 가져오기
