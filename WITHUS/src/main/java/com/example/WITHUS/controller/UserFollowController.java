@@ -1,22 +1,30 @@
 package com.example.WITHUS.controller;
 
 import com.example.WITHUS.Repository.FollowRepository;
+import com.example.WITHUS.Repository.UserRepository;
 import com.example.WITHUS.dto.UserFollowDto;
 import com.example.WITHUS.entity.Follow;
+import com.example.WITHUS.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
+@CrossOrigin(origins = "*")
+@RestController
+@RequestMapping("/api/follow")
 @RequiredArgsConstructor
 public class UserFollowController {
 
     private final FollowRepository followRepository;
+    private final UserRepository userRepository;
 
-    // 1️⃣ 팔로우 추가
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<String> follow(@RequestBody UserFollowDto dto) {
         if (!followRepository.existsByFollowerAndFollowee(dto.getFollower(), dto.getFollowee())) {
             Follow follow = Follow.builder()
@@ -31,8 +39,8 @@ public class UserFollowController {
         }
     }
 
-    // 2️⃣ 팔로우 취소
-    @DeleteMapping
+    @Transactional
+    @PostMapping("/delete")
     public ResponseEntity<String> unfollow(@RequestBody UserFollowDto dto) {
         if (followRepository.existsByFollowerAndFollowee(dto.getFollower(), dto.getFollowee())) {
             followRepository.deleteByFollowerAndFollowee(dto.getFollower(), dto.getFollowee());
@@ -42,24 +50,47 @@ public class UserFollowController {
         }
     }
 
-    // 3️⃣ 팔로우 여부 확인
     @GetMapping("/check")
     public ResponseEntity<Boolean> isFollowing(@RequestParam String follower, @RequestParam String followee) {
         boolean exists = followRepository.existsByFollowerAndFollowee(follower, followee);
         return ResponseEntity.ok(exists);
     }
 
-    // 4️⃣ 팔로워 목록 조회 (나를 팔로우하는 사람들)
+    // ✅ 팔로워 목록 조회 (나를 팔로우하는 사람)
     @GetMapping("/followers/{userId}")
-    public ResponseEntity<List<Follow>> getFollowers(@PathVariable String userId) {
+    public ResponseEntity<List<UserFollowDto>> getFollowers(@PathVariable String userId) {
         List<Follow> followers = followRepository.findByFollowee(userId);
-        return ResponseEntity.ok(followers);
+
+        List<UserFollowDto> result = followers.stream()
+                .map(follow -> userRepository.findById(follow.getFollower()))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .map(user -> UserFollowDto.builder()
+                        .userId(user.getUserId())
+                        .userNick(user.getUserNick())
+                        .profileImg(user.getProfileImg())
+                        .build())
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(result);
     }
 
-    // 5️⃣ 팔로잉 목록 조회 (내가 팔로우한 사람들)
+    // ✅ 팔로잉 목록 조회 (내가 팔로우한 사람)
     @GetMapping("/followings/{userId}")
-    public ResponseEntity<List<Follow>> getFollowings(@PathVariable String userId) {
+    public ResponseEntity<List<UserFollowDto>> getFollowings(@PathVariable String userId) {
         List<Follow> followings = followRepository.findByFollower(userId);
-        return ResponseEntity.ok(followings);
+
+        List<UserFollowDto> result = followings.stream()
+                .map(follow -> userRepository.findById(follow.getFollowee()))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .map(user -> UserFollowDto.builder()
+                        .userId(user.getUserId())
+                        .userNick(user.getUserNick())
+                        .profileImg(user.getProfileImg())
+                        .build())
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(result);
     }
 }

@@ -7,13 +7,14 @@ import com.example.WITHUS.Repository.UserRepository;
 import com.example.WITHUS.Repository.UserBlockRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/block")
@@ -22,7 +23,7 @@ public class UserBlockController {
     private final UserBlockRepository userBlockRepository;
 
     // 1. 차단하기
-    @PostMapping("/block")
+    @PostMapping
     public ResponseEntity<String> blockUser(@RequestBody UserBlockDto requestDto) {
         // 차단하려는 사람과 차단당하는 사람이 모두 유효한지 확인
         if (userRepository.findById(requestDto.getBlockingUserId()).isEmpty()) {
@@ -65,6 +66,7 @@ public class UserBlockController {
 
     // 3. 차단 해제
     @DeleteMapping("/unblock")
+    @Transactional
     public ResponseEntity<String> unblockUser(@RequestBody UserBlockDto requestDto) {
         userBlockRepository.deleteByBlockingUserIdAndBlockedUserId(requestDto.getBlockingUserId(), requestDto.getBlockedUserId());
         return ResponseEntity.ok("🚫 차단 해제되었습니다.");

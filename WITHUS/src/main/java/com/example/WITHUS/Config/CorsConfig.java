@@ -25,5 +25,8 @@ public class CorsConfig {
         source.registerCorsConfiguration("/**", config); // 모든 경로에 대해 적용
         return new CorsFilter(source);
     }
+
+
+
 }
 

@@ -11,11 +11,13 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+
 @Table(name = "TB_COMMUNITY", schema = "campus_24K_LI2_p2_6")
 public class Community {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "COMM_IDX", nullable = false)
-    private Integer id;
+    private Integer commIdx;
 
     @Column(name = "COMM_TITLE", nullable = false, length = 1000)
     private String commTitle;
@@ -35,9 +37,10 @@ public class Community {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "USER_ID", nullable = false)
-    private User user;
+    private User userId;
 
     @OneToMany(mappedBy = "commIdx")
     private Set<Comment> tbComments = new LinkedHashSet<>();
+
 
 }

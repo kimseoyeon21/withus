@@ -43,7 +43,22 @@ public class SecurityConfig {
                                 "/api/signup",
                                 "/api/user/me",
                                 "/api/user/images/**",
-                                "/profile_images/**"
+                                "/profile_images/**",
+                                "/api/community",                 // GET 요청 (게시글 전체 조회)
+                                "/api/community/upload",          // 🔥 POST 요청 (게시글 등록)
+                                "/api/user/update",
+                                "/api/community/images/**",        // 🔥 이미지 파일 조회
+                                "/api/community/**",
+                                "/api/community/my",
+                                "/api/community/user/**",
+                                "/api/comment/**",
+                                "/api/user/change-password",
+                                "/api/delete/**",
+                                "/api/user/**",
+                                "/api/follow/add",
+                                "/api/follow/delete",
+                                "/api/follow/**",
+                                "/api/block/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

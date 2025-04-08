@@ -7,5 +7,5 @@ import lombok.Setter;
 @Setter
 public class UserBlockResponseDto {
     private String blockedUserId; // 차단당하는 사람
-    private String blockedAt;
+    private String blockedAt; // 차단 당한 시점
 }

@@ -17,6 +17,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.util.Optional;
 
+@CrossOrigin(origins ="*")
 @RestController
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
@@ -45,6 +46,13 @@ public class UserInfoController {
         User user = userOpt.get();
 
 
+        return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<User> getUserProfile(@PathVariable String userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("❌ 유저를 찾을 수 없습니다."));
         return ResponseEntity.ok(user);
     }
 

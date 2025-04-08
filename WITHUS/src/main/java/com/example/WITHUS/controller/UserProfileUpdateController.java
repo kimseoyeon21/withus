@@ -1,38 +1,74 @@
+// UserUpdateController.java (혹은 기존 컨트롤러에 추가해도 됨)
 package com.example.WITHUS.controller;
 
 import com.example.WITHUS.Repository.UserRepository;
 import com.example.WITHUS.dto.UserProfileUpdateDto;
 import com.example.WITHUS.entity.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/user")
 public class UserProfileUpdateController {
 
     private final UserRepository userRepository;
 
-    public UserProfileUpdateController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    @PostMapping(value = "/update", consumes = {"multipart/form-data"})
+    @Transactional
+    public ResponseEntity<?> updateUserProfile(
+            @RequestPart("user") UserProfileUpdateDto dto,
+            @RequestPart(value = "profileImg", required = false) MultipartFile profileImg
+    ) throws IOException {
 
-    // 프로필 편집 (이름, 소개 변경)
-    @PutMapping("/update")
-    public ResponseEntity<?> updateProfile(@RequestBody UserProfileUpdateDto request) {
-        // 이미 프론트에서 받아온 userId를 그대로 사용
-        String userId = request.getUserId(); // 프로필 변경에서 받은 userId
+        Optional<User> userOpt = userRepository.findById(dto.getUserId());
 
-        // 유저 정보 직접 업데이트 (조회는 불필요)
-        User user = userRepository.findById(userId).get(); // 유저가 존재한다고 가정
+        if (userOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body("❌ 존재하지 않는 사용자입니다.");
+        }
 
-        // 프로필 사진, 이름과 소개 변경
-        user.setProfileImg(request.getProfileImg()); // 프로필 사진 변경
-        user.setUserNick(request.getUserNick());  // 이름 변경
-        user.setProfileInfo(request.getProfileInfo());    // 소개 변경
+        User user = userOpt.get();
 
-        // DB에 저장
+        if (dto.getUserNick() != null) {
+            user.setUserNick(dto.getUserNick());
+        }
+
+        if (dto.getProfileInfo() != null) {
+            user.setProfileInfo(dto.getProfileInfo());
+        }
+
+        if (profileImg != null && !profileImg.isEmpty()) {
+            String originalFileName = profileImg.getOriginalFilename();
+            String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1).toLowerCase();
+
+            if (!(fileExtension.equals("jpg") || fileExtension.equals("jpeg") || fileExtension.equals("png"))) {
+                return ResponseEntity.badRequest().body("❌ JPG, JPEG, PNG만 업로드 가능합니다.");
+            }
+
+            String fileName = UUID.randomUUID() + "_" + originalFileName;
+            String uploadDir = "C:/community_uploads/profiles/";
+            File uploadPath = new File(uploadDir);
+
+            if (!uploadPath.exists()) {
+                uploadPath.mkdirs();
+            }
+
+            File saveFile = new File(uploadDir + fileName);
+            profileImg.transferTo(saveFile);
+
+            user.setProfileImg(fileName);  // 새 이미지로 업데이트
+        }
+
         userRepository.save(user);
 
-        return ResponseEntity.ok("프로필이 업데이트되었습니다.");
+        return ResponseEntity.ok("✅ 프로필 수정 완료!");
     }
 }

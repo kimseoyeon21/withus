@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/delete")
 @RequiredArgsConstructor
@@ -18,9 +19,17 @@ public class UserDeleteController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @DeleteMapping("/{userId}")
+    @PostMapping("/{userId}")
     public ResponseEntity<?> deleteAccount(@PathVariable String userId,
                                            @RequestBody UserDeleteAccountRequestDto dto) {
+
+        System.out.println("요청 비밀번호: " + dto.getPassword());
+        System.out.println("확인 비밀번호: " + dto.getConfirmPassword());
+
+        if (dto == null || dto.getPassword() == null || dto.getConfirmPassword() == null) {
+            return ResponseEntity.badRequest().body("❌ 요청 정보가 잘못되었습니다.");
+        }
+
         // 1. 비밀번호와 확인값 일치 확인
         if (!dto.getPassword().equals(dto.getConfirmPassword())) {
             return ResponseEntity.badRequest().body("❌ 비밀번호가 일치하지 않습니다.");
@@ -35,8 +44,8 @@ public class UserDeleteController {
         User user = userOpt.get();
 
         // 3. 비밀번호 비교
-        if (!passwordEncoder.matches(dto.getPassword(), user.getUserPassword())) {
-            return ResponseEntity.badRequest().body("❌ 비밀번호가 올바르지 않습니다.");
+        if (!dto.getPassword().equals(user.getUserPassword())) {
+            return ResponseEntity.badRequest().body("❌ 현재 비밀번호가 올바르지 않습니다.");
         }
 
         // 4. 삭제
