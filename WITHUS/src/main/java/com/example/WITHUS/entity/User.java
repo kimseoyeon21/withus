@@ -1,16 +1,16 @@
 package com.example.WITHUS.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="tb_user")
@@ -20,6 +20,15 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Builder
 public class User {
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private Set<Croom> crooms = new HashSet<>();
+
+    @OneToMany(mappedBy = "chatter")
+    @JsonIgnore
+    private Set<Chat> chats = new HashSet<>();
+
 
     @Id
     @Column(name = "USER_ID", length = 50)
@@ -37,7 +46,7 @@ public class User {
     @Column(name = "USER_BIRTHDATE")
     private Date userBirthdate;
 
-    @Column(name = "JOINED_AT")
+    @Column(name = "JOINED_AT", nullable = false)
     private Timestamp joinedAt;
 
     @Column(name = "USER_NICK", length = 50, nullable = false)

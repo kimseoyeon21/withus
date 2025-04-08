@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserFollowDto {

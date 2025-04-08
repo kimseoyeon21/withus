@@ -58,7 +58,9 @@ public class SecurityConfig {
                                 "/api/follow/add",
                                 "/api/follow/delete",
                                 "/api/follow/**",
-                                "/api/block/**"
+                                "/api/block/**",
+                                "/api/croom/**",
+                                "/ws/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

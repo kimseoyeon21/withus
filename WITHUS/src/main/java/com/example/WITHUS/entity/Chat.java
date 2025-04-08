@@ -1,5 +1,6 @@
 package com.example.WITHUS.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,10 +19,12 @@ public class Chat {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "CROOM_IDX", nullable = false)
+    @JsonIgnore
     private Croom croomIdx;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "CHATTER", nullable = false)
+    @JsonIgnore
     private User chatter;
 
     @Lob
@@ -33,5 +36,6 @@ public class Chat {
 
     @Column(name = "CREATED_AT", nullable = false)
     private Instant createdAt;
+
 
 }

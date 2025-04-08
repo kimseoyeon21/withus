@@ -16,7 +16,7 @@ public class CorsConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true); // 인증 정보 포함 허용
-        config.setAllowedOrigins(Arrays.asList("http://192.168.219.64:3000","http://localhost:3000")); // 프론트 주소
+        config.setAllowedOrigins(Arrays.asList("http://192.168.219.68:3000","http://localhost:3000")); // 프론트 주소
         config.setAllowedHeaders(Arrays.asList("*")); // 모든 헤더 허용
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS")); // 모든 메서드 허용
         config.setExposedHeaders(Arrays.asList("*")); // 응답 헤더 노출
