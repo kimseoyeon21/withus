@@ -10,6 +10,13 @@
 	쉽고 효율적인 공모전 협업 환경을 제공하는 서비스
 <br>
 
+## 📎 GitHub 주소 (Frontend / Backend / AI)
+- Frontend : https://github.com/suhwan87/milo-fe <br>
+- Backend (Spring) : https://github.com/suhwan87/milo-be <br>
+- AI Server (FastAPI) : https://github.com/julle0123/milo-ai
+<br>
+
+
 ## 📅 프로젝트 기간
 2025.04.02 ~ 2025.04.16 
 <br>
