@@ -117,7 +117,7 @@
 ---
 
 ### 마이프로필/게시글 작성/팔로우목록
-![image](https://github.com/user-attachments/assets/dd987a91-d7ad-420c-b6c2-942979a8e6d1)
+![image](https://github.com/user-attachments/assets/8997481d-3e4c-4cdc-acf1-8a1a2098ed0e)
 <br>
 
 ---
