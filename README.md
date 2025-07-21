@@ -14,11 +14,12 @@
 - Frontend : https://github.com/sonhyunsoo715/contest-recommender-frontend <br>
 - Backend (Spring) : https://github.com/kimseoyeon21/withus-backend <br>
 - AI (FastAPI) : https://github.com/jung-dong-yeon/JDY <br>
-
+<br>
 
 ## 📅 프로젝트 기간
 2025.04.02 ~ 2025.04.16 
 <br><br>
+<br>
 
 ## ⭐ 주요 기능
 * 게시글 작성하고 마이프로필 및 피드에 작성한글 확인
