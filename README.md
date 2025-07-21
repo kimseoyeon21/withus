@@ -123,7 +123,7 @@
 ---
 
 ### 홈(피드)/좋아요+댓글/유저 검색
-![image](https://github.com/user-attachments/assets/cadffd87-c884-44b7-bea6-e8e03420e509)
+![image](https://github.com/user-attachments/assets/3e3ec55d-4b7c-413c-985a-2d9f257d4142)
 <br>
 
 ---
@@ -135,19 +135,19 @@
 ---
 
 ### 팀 생성,수정,삭제,참여/팀 추천
-![image](https://github.com/user-attachments/assets/fa92d531-767d-47ca-92eb-54d8297ae158)
+![image](https://github.com/user-attachments/assets/c2649247-8143-45ec-8d78-8e8cdd364701)
 <br>
 
 ---
 
 ### 채팅방/1대1,팀채팅/초대,참여자,일정 보기
-![image](https://github.com/user-attachments/assets/b69310a4-97e4-4dce-a1bc-e2d324533bee)
+![image](https://github.com/user-attachments/assets/805d3921-a77f-4478-93ec-5368618afd53)
 <br>
 
 ---
 
 ### 계정 설정
-![image](https://github.com/user-attachments/assets/799e380b-4eb7-4079-a988-94b4ca9ee7ef)
+![image](https://github.com/user-attachments/assets/38a4a304-927f-4d02-b17f-7a6ac2ac1bba)
 <br>
 
 ## 👨‍👩‍👦‍👦 팀원 역할
