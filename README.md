@@ -12,7 +12,7 @@
 
 ## 📎 GitHub 주소 (Frontend / Backend / AI)
 - Frontend : https://github.com/sonhyunsoo715/contest-recommender-frontend <br>
-- Backend (Spring) : https://github.com/suhwan87/milo-be <br>
+- Backend (Spring) : https://github.com/kimseoyeon21/withus-backend <br>
 - AI (FastAPI) : https://github.com/jung-dong-yeon/JDY <br>
 
 
