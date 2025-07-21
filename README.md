@@ -13,8 +13,7 @@
 ## 📎 GitHub 주소 (Frontend / Backend / AI)
 - Frontend : https://github.com/sonhyunsoo715/contest-recommender-frontend <br>
 - Backend (Spring) : https://github.com/suhwan87/milo-be <br>
-- AI Server (FastAPI) : https://github.com/julle0123/milo-ai
-<br>
+- AI (FastAPI) : https://github.com/jung-dong-yeon/JDY <br>
 
 
 ## 📅 프로젝트 기간
